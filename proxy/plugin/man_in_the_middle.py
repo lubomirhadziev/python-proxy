@@ -45,7 +45,6 @@ class ManInTheMiddlePlugin(HttpProxyBasePlugin):
         address = socket.gethostbyname(socket.gethostname())
 
         logger.error('Access from IP %s' % ipaddress.ip_address(address))
-        logger.error('Access from IP %s' % ipaddress.ip_address(socket.gethostname()))
 
         return chunk
 
