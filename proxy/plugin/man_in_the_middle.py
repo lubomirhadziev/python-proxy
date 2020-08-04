@@ -27,6 +27,7 @@ class ManInTheMiddlePlugin(HttpProxyBasePlugin):
         self, request: HttpParser) -> Optional[HttpParser]:
         address = '94.155.136.17'
         request.add_header(b'X-Forwarded-For', bytes('%s' % address, encoding='UTF-8'))
+        request.add_header(b'X-ProxyUser-Ip', bytes('%s' % address, encoding='UTF-8'))
 
 
         return request
@@ -34,8 +35,8 @@ class ManInTheMiddlePlugin(HttpProxyBasePlugin):
     def handle_client_request(
         self, request: HttpParser) -> Optional[HttpParser]:
         address = '94.155.136.17'
-        # address = socket.gethostbyname(socket.gethostname())
         request.add_header(b'X-Forwarded-For', bytes('%s' % address, encoding='UTF-8'))
+        request.add_header(b'X-ProxyUser-Ip', bytes('%s' % address, encoding='UTF-8'))
 
         return request
 
