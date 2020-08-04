@@ -25,14 +25,16 @@ class ManInTheMiddlePlugin(HttpProxyBasePlugin):
 
     def before_upstream_connection(
         self, request: HttpParser) -> Optional[HttpParser]:
-        address = socket.gethostbyname(socket.gethostname())
-        request.add_header(b'X-Forwarded-For', bytes('94.155.136.17'))
+        address = '94.155.136.17'
+        request.add_header(b'X-Forwarded-For', bytes('%s' % address, encoding='UTF-8'))
+
 
         return request
 
     def handle_client_request(
         self, request: HttpParser) -> Optional[HttpParser]:
-        address = socket.gethostbyname(socket.gethostname())
+        address = '94.155.136.17'
+        # address = socket.gethostbyname(socket.gethostname())
         request.add_header(b'X-Forwarded-For', bytes('94.155.136.17'))
 
         return request
