@@ -8,6 +8,7 @@
     :copyright: (c) 2013-present by Abhinav Singh and contributors.
     :license: BSD, see LICENSE for more details.
 """
+import ipaddress
 import logging
 import socket
 from typing import Optional
@@ -43,7 +44,8 @@ class ManInTheMiddlePlugin(HttpProxyBasePlugin):
     def handle_upstream_chunk(self, chunk: memoryview) -> memoryview:
         address = socket.gethostbyname(socket.gethostname())
 
-        logger.error('Access from IP %s' % address)
+        logger.error('Access from IP %s' % ipaddress.ip_address(address))
+        logger.error('Access from IP %s' % ipaddress.ip_address(socket.gethostname()))
 
         return chunk
 
